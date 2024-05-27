@@ -23,3 +23,4 @@ class Message(Base):
     created_at = Column(DateTime, default=datetime.now)
     text = Column(String(255), nullable=False)
     message_type = Column(SQLEnum(MessageType), nullable=True)
+    new_test_field = Column(String(255), nullable=True)
