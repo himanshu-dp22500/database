@@ -60,8 +60,15 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+    import os
+    from dotenv import load_dotenv
+    load_dotenv()
+
+    configration = config.get_section(config.config_ini_section, {})
+    configration['sqlalchemy.url'] = os.environ.get("DB_URL", "postgresql+psycopg2://postgres:password@localhost:5432/dailype")
+
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section, {}),
+        configration,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
